@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AR Resizer Pro - By Adityaa Rahman</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif}
+body{background:#0c0c14;color:#fff;min-height:100vh;padding-bottom:90px}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(900px at 0% 0%, #7a2bff2e, transparent), radial-gradient(600px at 100% 0%, #00d4ff22, transparent), #0c0c14}
+.nav{position:sticky;top:0;z-index:20;background:rgba(12,12,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:grid;place-items:center;font-family:'Space Grotesk';font-weight:700;font-size:17px}
+.logo-t b{font-family:'Space Grotesk';font-size:15px;letter-spacing:-0.3px;display:block;line-height:1}
+.logo-t span{font-size:10px;letter-spacing:1.5px;opacity:.5;text-transform:uppercase}
+.badge{font-size:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);padding:7px 12px;border-radius:100px}
+.wrap{max-width:520px;margin:0 auto;padding:16px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:20px;backdrop-filter:blur(20px);box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.h1{font-family:'Space Grotesk';font-size:32px;line-height:0.95;letter-spacing:-1px}
+.h1 span{background:linear-gradient(90deg,#8b5cf6,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{margin-top:10px;font-size:13px;line-height:1.6;opacity:.6}
+.tabs{display:flex;gap:8px;margin:18px 0}
+.tab{flex:1;padding:12px;border-radius:100px;text-align:center;font-weight:800;font-size:13px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);cursor:pointer}
+.tab.active{background:#fff;color:#000;border-color:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{background:#11111a;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px 14px}
+.field label{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;opacity:.5;font-weight:800;display:block;margin-bottom:6px}
+.field input{width:100%;background:transparent;border:none;color:#fff;font-size:22px;font-weight:800;outline:none}
+.field.unit{font-size:12px;opacity:.5;margin-top:2px}
+.check{margin-top:10px;display:flex;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:14px;border-radius:14px;align-items:flex-start}
+.check.on{background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.5)}
+.check input{width:22px;height:22px;flex-shrink:0;accent-color:#7c3aed;margin-top:1px}
+.check b{font-size:13px;display:block;line-height:1.2}
+.check p{font-size:11px;opacity:.6;margin-top:4px;line-height:1.4}
+.drop{margin-top:14px;border:1.5px dashed rgba(255,255,255,.18);border-radius:18px;padding:22px;text-align:center;background:rgba(124,58,237,.08);cursor:pointer}
+.drop b{font-size:14px;display:block}
+.drop small{font-size:11px;opacity:.5;display:block;margin-top:4px}
+.list{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden}
+.item img{width:100%;height:80px;object-fit:cover;display:block}
+.item.meta{padding:8px;font-size:10px}
+.btn{position:fixed;bottom:0;left:0;right:0;max-width:520px;margin:0 auto;background:linear-gradient(90deg,#7c3aed,#06b6d4);padding:16px;border:none;color:#fff;font-weight:800;font-size:15px;z-index:30;border-radius:18px 18px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.5);cursor:pointer}
+.btn:disabled{opacity:.4}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="nav">
+<div class="logo"><div class="logo-icon">AR</div><div class="logo-t"><b>ADITYAA STUDIO</b><span>Image Resizer Pro</span></div></div>
+<div class="badge"> By Adityaa Rahman</div>
+</div>
+<div class="wrap">
+<div class="card">
+<div class="h1">Resize Foto<br><span>Seindah Karya</span><br>Lu Sendiri.</div>
+<div class="sub">Tool premium buatan <b>Adityaa Rahman</b>. Lebih rapi, lebih cepat, 100% jalan di HP tanpa upload ke server orang.</div>
+<div class="tabs">
+<div class="tab active" id="tpix" onclick="setM('pix')">By Pixels</div>
+<div class="tab" id="tper" onclick="setM('per')">By Percentage</div>
+</div>
+<div id="pixBox">
+<div class="grid2">
+<div class="field"><label>Width</label><input id="W" type="number" value="1200" oninput="if(aspect.checked) toH()"><div class="unit">px  lebar</div></div>
+<div class="field"><label>Height</label><input id="H" type="number" value="1600" oninput="if(aspect.checked) toW()"><div class="unit">px  tinggi</div></div>
+</div>
+</div>
+<div id="perBox" style="display:none">
+<div class="field"><label>Percentage</label><input id="P" type="number" value="50"><div class="unit">%  skala foto</div></div>
+</div>
+<label class="check on" id="c1"><input type="checkbox" id="aspect" checked onchange="toggleC()"><div><b>Maintain aspect ratio</b><p>Centang = foto tetap proporsional, enak dilihat. Kosongin = paksa ukuran 12001600 (bisa gepeng).</p></div></label>
+<label class="check" id="c2"><input type="checkbox" id="noUp" onchange="document.getElementById('c2').classList.toggle('on',this.checked)"><div><b>Do not enlarge if smaller</b><p>Jangan dibesarin kalau foto aslinya kecil, biar gak pecah & buram.</p></div></label>
+<div class="drop" id="dz" onclick="document.getElementById('f').click()"><b> Tap untuk pilih foto</b><small>Bisa pilih 100 foto sekaligus  JPG PNG WEBP  Offline & Aman</small><input type="file" id="f" hidden multiple accept="image/*"></div>
+<div class="list" id="list"></div>
+</div>
+</div>
+<button class="btn" id="btn" disabled onclick="process()"> Resize Sekarang  By Adityaa Rahman </button>
+<script>
+let files=[], mode='pix', oW=0, oH=0;
+const W=document.getElementById('W'), H=document.getElementById('H'), P=document.getElementById('P'), aspect=document.getElementById('aspect');
+function setM(m){mode=m; document.getElementById('tpix').classList.toggle('active',m==='pix'); document.getElementById('tper').classList.toggle('active',m==='per'); document.getElementById('pixBox').style.display=m==='pix'?'block':'none'; document.getElementById('perBox').style.display=m==='per'?'block':'none';}
+function toggleC(){document.getElementById('c1').classList.toggle('on',aspect.checked); if(aspect.checked) toH();}
+function toH(){const w=parseInt(W.value)||0; if(oW&&oH&&w) H.value=Math.round(w*oH/oW);}
+function toW(){const h=parseInt(H.value)||0; if(oW&&oH&&h) W.value=Math.round(h*oW/oH);}
+document.getElementById('f').onchange=e=>add(e.target.files);
+const dz=document.getElementById('dz');
+dz.ondragover=e=>{e.preventDefault(); dz.style.borderColor='#7c3aed'};
+dz.ondragleave=()=>dz.style.borderColor='rgba(255,255,255,.18)';
+dz.ondrop=e=>{e.preventDefault(); add(e.target.files)};
+function add(list){
+ const arr=[...list]; files.push(...arr);
+ const img=new Image(); img.onload=()=>{oW=img.width;oH=img.height; if(aspect.checked) toH();}; img.src=URL.createObjectURL(arr[0]);
+ render();
+}
+function render(){
+ const L=document.getElementById('list'); L.innerHTML='';
+ files.forEach((f,i)=>{
+  const url=URL.createObjectURL(f);
+  L.innerHTML+=`<div class="item"><img src="${url}"><div class="meta"><b>${f.name.slice(0,18)}</b><br>${(f.size/1024).toFixed(0)} KB  <a href="#" onclick="files.splice(${i},1);render();return false" style="color:#ff6b6b;text-decoration:none">hapus</a></div></div>`;
+ });
+ document.getElementById('btn').disabled=files.length==0;
+ document.getElementById('btn').textContent=files.length?` Resize ${files.length} Foto  By Adityaa Rahman `:' Resize Sekarang  By Adityaa Rahman ';
+}
+async function process(){
+ const b=document.getElementById('btn'); b.textContent=' Memproses...';
+ for(let f of files){
+  const img=await new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=URL.createObjectURL(f);});
+  let tw, th;
+  if(mode==='per'){const p=parseInt(P.value)/100; tw=Math.round(img.width*p); th=Math.round(img.height*p);}
+  else{ tw=parseInt(W.value)||img.width; if(aspect.checked) th=Math.round(tw*img.height/img.width); else th=parseInt(H.value)||img.height; }
+  if(document.getElementById('noUp').checked){ if(tw>img.width) tw=img.width; if(th>img.height) th=img.height; }
+  const c=document.createElement('canvas'); c.width=tw; c.height=th; c.getContext('2d').drawImage(img,0,0,tw,th);
+  const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.92));
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=f.name.replace(/\.[^/.]+$/,'')+`_${tw}x${th}_ByAdityaaRahman.jpg`; a.click();
+ }
+ b.textContent=' Selesai Tuan!'; setTimeout(()=>b.textContent=` Resize ${files.length} Foto  By Adityaa Rahman `,1500);
+}
+</script>
+</body>
+  </html>
